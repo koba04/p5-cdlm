@@ -14,7 +14,7 @@ function get_list(country) {
             $("#list").html(html);
             highlight();
 
-            swfobject.embedSWF("http://www.youtube.com/v/" + video_list[index].video.id + "?enablejsapi=1&autoplay=1&playerapiid=player",
+            swfobject.embedSWF("http://www.youtube.com/v/" + video_list[index].video.id + "?enablejsapi=1&playerapiid=player",
                               "video", 854 * 0.7, 480 * 0.7, "8", null, null, { allowScriptAccess: "always" }, { id: "player" });
             play();
             init = false;
