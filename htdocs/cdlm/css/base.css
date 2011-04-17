@@ -1,0 +1,80 @@
+body{
+    margin: 0 0 0 0;
+    background-color: #E3E3E3;
+}
+h1 {
+    padding 10px 10px 10px 10px;
+    margin: 0 0 0 0;
+    font-size: 1.2em;
+}
+
+header {
+    border-radius: 5px;
+    color: white;
+    background-color: #CC0000;
+}
+
+div {
+    font-size: 1em;
+}
+
+li {
+    list-style-type: none;
+    margin-bottom: 5px;
+}
+
+a:hover {
+    color:red;
+}
+
+.rank {
+    float: left;
+    font-size: 2em;
+}
+
+.info {
+    font-size: 1.2em;
+}
+.video_info {
+    font-size: 0.8em;
+}
+
+.track {
+    clear: both;
+    border-bottom: dotted medium #FFE4E1;
+    margin-bottom: 8px;
+}
+.next_track {
+
+}
+
+#content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 850px;
+}
+
+#next_img {
+    margin-right: 5px;
+    margin-bottom: 20px;
+    float: left;
+}
+#next_song {
+    font-size: 0.8em;
+}
+
+#current {
+    clear: both;
+    margin-left: 25px;
+}
+#player, #operation {
+    margin-left: 25px;
+}
+
+
+footer {
+    font-size: 0.9em;
+    border-radius: 5px;
+    color: white;
+    background-color: #CC0000;
+}
