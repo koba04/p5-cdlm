@@ -59,7 +59,7 @@ function play() {
     var current_html = '<div class="track">';
     current_html += '<span class="rank">' + video_list[index].rank + "&nbsp;</span>";
     current_html += '<span class="info">' + video_list[index].info.artist.name + " / " + video_list[index].info.name + "</span><br />";
-    if ( this.video ) {
+    if ( video_list[index].video ) {
         current_html += '<span class="video_info">(' +  video_list[index].video.title + ")</span>";
     }
     current_html += '</div>';
@@ -70,7 +70,7 @@ function play() {
         next_song_html += '<div class="next_track">';
         next_song_html += '<span class="rank">'  + video_list[next].rank + '&nbsp;</span>';
         next_song_html += '<span class="info">' + video_list[next].info.artist.name + " / " + video_list[next].info.name + "</span><br />";
-        if ( this.video ) {
+        if ( video_list[index].video ) {
             next_song_html += '<span class="video_info">(' + video_list[next].video.title + ")</span>";
         }
         next_song_html += '</div>';
