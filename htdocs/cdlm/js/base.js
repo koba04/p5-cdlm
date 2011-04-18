@@ -8,7 +8,9 @@ function get_list(country) {
                 html += '<div id="trac_"' + this.rank  + '" class="track">';
                 html += '<span class="rank">' + this.rank + "&nbsp;</span>";
                 html += '<span class="info">' + this.info.artist.name + " / " + this.info.name + "</span><br />";
-                html += '<span class="video_info">(' + this.video.title + ")</span>";
+                if ( this.video ) {
+                    html += '<span class="video_info">(' + this.video.title + ")</span>";
+                }
                 html += '</div>';
             });
             $("#list").html(html);
@@ -57,7 +59,9 @@ function play() {
     var current_html = '<div class="track">';
     current_html += '<span class="rank">' + video_list[index].rank + "&nbsp;</span>";
     current_html += '<span class="info">' + video_list[index].info.artist.name + " / " + video_list[index].info.name + "</span><br />";
-    current_html += '<span class="video_info">(' +  video_list[index].video.title + ")</span>";
+    if ( this.video ) {
+        current_html += '<span class="video_info">(' +  video_list[index].video.title + ")</span>";
+    }
     current_html += '</div>';
     $("#current").html(current_html);
     if ( video_list[index].rank > 1 ) {
@@ -66,7 +70,9 @@ function play() {
         next_song_html += '<div class="next_track">';
         next_song_html += '<span class="rank">'  + video_list[next].rank + '&nbsp;</span>';
         next_song_html += '<span class="info">' + video_list[next].info.artist.name + " / " + video_list[next].info.name + "</span><br />";
-        next_song_html += '<span class="video_info">(' + video_list[next].video.title + ")</span>";
+        if ( this.video ) {
+            next_song_html += '<span class="video_info">(' + video_list[next].video.title + ")</span>";
+        }
         next_song_html += '</div>';
         $("#next_song").html(next_song_html);
     } else {
