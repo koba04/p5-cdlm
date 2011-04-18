@@ -80,3 +80,9 @@ footer {
     color: white;
     background-color: #CC0000;
 }
+footer a{
+    color: white;
+}
+footer a:hover {
+    color:gray;
+}

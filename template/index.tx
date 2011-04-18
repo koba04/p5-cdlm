@@ -87,7 +87,7 @@ function onytplayerStateChange(newState) {
 </div>
 </article>
 <footer>
-created by koba04. powered by Youtube &amp; Last.fm
+created by <a href="http://about.me/koba04">koba04</a>. powered by <a href="http://www.youtube.com/">Youtube</a> &amp; <a href="http://www.lastfm.com">Last.fm</a>
 </footer>
 </body>
 </html>
