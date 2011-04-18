@@ -9,6 +9,7 @@ h1 {
 }
 
 header {
+    display: block;
     border-radius: 5px;
     color: white;
     background-color: #CC0000;
@@ -73,6 +74,7 @@ a:hover {
 
 
 footer {
+    display: block;
     font-size: 0.9em;
     border-radius: 5px;
     color: white;
