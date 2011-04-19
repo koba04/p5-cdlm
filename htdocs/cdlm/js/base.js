@@ -29,12 +29,12 @@ function get_list(country) {
             $(".play_button").click(function() {
                 var id = $(this).attr('id');
                 id = id.replace(/button_trac_/,"")
-                play(id);
+                play('next', id);
             });
 
             swfobject.embedSWF("http://www.youtube.com/v/" + video_list[index].video.id + "?enablejsapi=1&playerapiid=player",
                               "video", 854 * 0.7, 480 * 0.7, "8", null, null, { allowScriptAccess: "always" }, { id: "player" });
-            play();
+            play('next');
             init = false;
        }
     );
@@ -45,28 +45,32 @@ function next() {
         return;
     }
     --index;
-    play();
+    play('next');
 }
 function prev() {
     if ( index >= rank_max ) {
         return;
     }
     ++index;
-    play();
+    play('prev');
 }
 
 function show() {
     $("#list").toggle();
 }
 
-function play(play_index) {
+function play(mode, play_index) {
     if ( play_index ) {
         index = play_index;
     }
 
     // 動画なかったらさらに次へ
     while ( index > 1 && (!video_list[index] || !video_list[index].video) ) {
-        --index;
+        if ( mode == 'prev' ) {
+            ++index;
+        } else {
+            --index;
+        }
     }
 
     if (!init) {
