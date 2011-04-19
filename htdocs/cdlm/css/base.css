@@ -48,6 +48,19 @@ a:hover {
 .next_track {
 
 }
+.play_button {
+    float: right;
+    padding: 5px 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #EEEEEE;
+    border-radius: 5px;
+    color: #004276;
+}
+.play_button:hover {
+    background-color: #FFE4E1;
+}
 
 #content {
     margin-left: auto;
@@ -67,6 +80,8 @@ a:hover {
 #current {
     clear: both;
     margin-left: 25px;
+    background-color: #FFE4E1;
+    border-radius: 5px;
 }
 #player, #operation {
     margin-left: 25px;

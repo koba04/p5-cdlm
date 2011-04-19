@@ -12,8 +12,6 @@
 </head>
 <body>
 <script>
-var video_list = [];
-var index = 0;
 var loading = false;
 jQuery(function($) {
     $("#prev").click(function(){
@@ -44,7 +42,6 @@ function onytplayerStateChange(newState) {
             break;
         case 2:     // 一時停止中
             if ( loading ) {
-                $("#trac_" + video_list[index].rank).append("<em>=&gt; Can't Play!!!</em>");
                 next();
             }
             loading = false;
