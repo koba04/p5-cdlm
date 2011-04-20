@@ -21,14 +21,17 @@ builder {
         my $env = shift;
         my $req = Plack::Request->new($env);
 
-        my ($country) = $req->path =~ /cdlm\/track\/(jp|us|uk)/;
+        my ($country) = $req->path =~ /\/cdlm\/track\/(jp|us|uk)/;
 
         my $response = '';
-        if ( $country && $req->path =~ /cdlm\/track\/(jp|us|uk)$/ ) {
-            my $tx = Text::Xslate->new(
-                path    => [ File::Spec->catdir(dirname(__FILE__), 'template') ],
-            );
-            $response = $tx->render('index.tx', { country => $country });
+
+        my $tx = Text::Xslate->new(
+            path    => [ File::Spec->catdir(dirname(__FILE__), 'template') ],
+        );
+        if ( $req->path =~ /\/cdlm\/$/ ) {
+            $response = $tx->render('index.tx', {});
+        } elsif ( $country && $req->path =~ /cdlm\/track\/(jp|us|uk)$/ ) {
+            $response = $tx->render('track.tx', { country => $country });
 
         } elsif ( $country && $req->path =~ /\.json$/ ) {
             # XXX get client ip address?

@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="keywords" content="YouTube, LastFM, Player,連続再生, ランキング">
 <meta name="description" content="Last.FMのランキングをもとにYouTubeの動画を連続再生する">
-<title>CountDown LastFM Ranking (<: $country :>)</title>
+<title>CountDown LastFM Ranking</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
@@ -14,74 +14,25 @@
 </head>
 <body>
 <script>
-var loading = false;
 jQuery(function($) {
-    $("#prev").click(function(){
-        prev();
-    });
-    $("#next").click(function(){
-        next();
-    });
-    $("#show").click(function() {
-        show();
-    });
     $("#content").tabs();
-    var country = "<: $country :>";
-    get_list(country);
 });
-function onYouTubePlayerReady(playerId) {
-    document.getElementById(playerId).addEventListener("onStateChange", "onytplayerStateChange");
-}
-
-function onytplayerStateChange(newState) {
-    // 削除動画を読み込むと止まってしまう対策
-    switch (newState) {
-        case 0:     // 終了
-            next();
-            break;
-        case 1:     // 再生中
-            loading = false;
-            break;
-        case 2:     // 一時停止中
-            if ( loading ) {
-                next();
-            }
-            loading = false;
-            break;
-        case 3:     // バッファリング中
-            loading = true;
-            break;
-    }
-}
 </script>
 <header>
-<h1>CountDown LastFM Ranking (<: $country :>)</h1>
+<h1>CountDown LastFM Ranking</h1>
 </header>
 <article>
 <div id="content">
     <ul>
-    <li><a href="#play">Video</a></li>
-    <li><a href="#list">Chart</a></li>
-    <li><a href="#other">Other</a></li>
+    <li><a href="#about">About</a></li>
     </ul>
-    <div id="play">
-        <span id="info"></span>
-        <div id="next_song"></div>
+    <div id="about">
+        CoundDown LastFM Ranking is...
+        <ul>
+            <li><a href="/cdlm/track/jp">Japan</a></li>
+            <li><a href="/cdlm/track/us">United States</a></li>
+            <li><a href="/cdlm/track/uk">United Kingdom</a></li>
     </div>
-    <div id="list"></div>
-    <div id="other">
-        <p>Do You Want to Play Which Countries Ranking ??</p>
-        <ul class=".ui-icon-play">
-        : $country == "jp" ? '<li>Japan</li>' | raw : '<li><a href="jp">Japan</a></li>' | raw
-        : $country == "us" ? "<li>United States</li>" | raw : '<li><a href="us">United States</a></li>' | raw
-        : $country == "uk" ? "<li>United Kingdom</li>" | raw : '<li><a href="uk">United Kingdom</a></li>' | raw
-        </ul>
-    </div>
-    <div id="current"></div>
-    <div id="video"></div>
-    <div id="operation" >
-        <input type="button"  id="prev" value="Prev" />
-        <input type="button"  id="next" value="Next" />
     </div>
 </div>
 </article>

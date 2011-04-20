@@ -14,6 +14,10 @@ header {
     color: white;
     background-color: #CC0000;
 }
+header a, header a:visited, header a:hover {
+    color: white;
+    text-decoration: none;
+}
 
 div {
     font-size: 1em;
