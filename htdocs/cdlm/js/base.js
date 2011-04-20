@@ -55,20 +55,24 @@ function prev() {
     play('prev');
 }
 
-function show() {
-    $("#list").toggle();
-}
-
 function play(mode, play_index) {
     if ( play_index ) {
         index = play_index;
     }
 
     // 動画なかったらさらに次へ
-    while ( index > 1 && (!video_list[index] || !video_list[index].video) ) {
+    while ( !video_list[index] || !video_list[index].video ) {
         if ( mode == 'prev' ) {
+            // これ以上戻れない
+            if ( index >= rank_max ) {
+                return;
+            }
             ++index;
         } else {
+            // これ以上先はない
+            if ( index <= 1 ) {
+                return;
+            }
             --index;
         }
     }
