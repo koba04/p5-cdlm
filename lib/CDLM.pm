@@ -8,7 +8,7 @@ use Config::Pit;
 use WebService::LastFM::Lite;
 use WebService::YouTube::Lite;
 
-sub rank {
+sub track {
     my ($class, $country, $from_country) = @_;
 
     # country

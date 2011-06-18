@@ -26,8 +26,7 @@ jQuery(function($) {
         show();
     });
     $("#content").tabs();
-    var country = "<: $country :>";
-    get_list(country);
+    get_list("<: $country :>", "<: $rank :>");
 });
 function onYouTubePlayerReady(playerId) {
     document.getElementById(playerId).addEventListener("onStateChange", "onytplayerStateChange");

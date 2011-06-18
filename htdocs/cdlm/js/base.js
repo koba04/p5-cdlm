@@ -2,7 +2,10 @@ var video_list = [];
 var rank_max = 50;
 var index = rank_max;
 var init = true;
-function get_list(country) {
+function get_list(country, init_index) {
+    if (init_index) {
+        index = init_index;
+    }
     $.getJSON("/cdlm/track/" + country + ".json", {},
         function(rs) {
             var html = "";
@@ -16,7 +19,7 @@ function get_list(country) {
                     html += '<span class="video_info">(' + this.video.title + ")</span>";
                     html += '<input type="button" id="button_trac_' + this.rank + '" value="play" class="play_button" />';
                     // 最初に再生可能なインデックス
-                    if ( !is_index_set ) {
+                    if ( !is_index_set && !init_index) {
                         index = this.rank;
                         is_index_set = true;
                     }

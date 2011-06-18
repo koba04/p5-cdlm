@@ -21,7 +21,7 @@ builder {
         my $env = shift;
         my $req = Plack::Request->new($env);
 
-        my ($country) = $req->path =~ /\/cdlm\/track\/(jp|us|uk)/;
+        my ($country) = $req->path =~ m{/cdlm/track/(jp|us|uk)};
 
         my $response = '';
 
@@ -30,9 +30,8 @@ builder {
         );
         if ( $req->path =~ /\/cdlm\/$/ ) {
             $response = $tx->render('index.tx', {});
-        } elsif ( $country && $req->path =~ /cdlm\/track\/(jp|us|uk)$/ ) {
-            $response = $tx->render('track.tx', { country => $country });
-
+        } elsif ( $country && $req->path =~ m{/cdlm/track/(?:jp|us|uk)(?:/(\d{1,2}))?$} ) {
+            $response = $tx->render('track.tx', { country => $country, rank => $1 });
         } elsif ( $country && $req->path =~ /\.json$/ ) {
             # XXX get client ip address?
             my $from = 'JP';
