@@ -2,7 +2,9 @@ var video_list = [];
 var rank_max = 50;
 var index = rank_max;
 var init = true;
-function get_list(country, init_index) {
+var country;
+function get_list(load_country, init_index) {
+    country = load_country;
     if (init_index) {
         index = init_index;
     }
@@ -108,6 +110,7 @@ function play(mode, play_index) {
         $("#next_song").html("");
     }
     highlight();
+    history.replaceState(null, "CDLM " + country + ":" + index, "/cdlm/track/" + country + "/" + index);
 }
 function highlight() {
    $("#list").children().css("color", "black");
