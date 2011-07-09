@@ -71,9 +71,9 @@ function onytplayerStateChange(newState) {
     <div id="other">
         <p>Do You Want to Play Which Countries Ranking ??</p>
         <ul class=".ui-icon-play">
-        : $country == "jp" ? '<li>Japan</li>' | raw : '<li><a href="jp">Japan</a></li>' | raw
-        : $country == "us" ? "<li>United States</li>" | raw : '<li><a href="us">United States</a></li>' | raw
-        : $country == "uk" ? "<li>United Kingdom</li>" | raw : '<li><a href="uk">United Kingdom</a></li>' | raw
+        : $country == "jp" ? '<li>Japan</li>' | raw : '<li><a href="/cdlm/track/jp">Japan</a></li>' | raw
+        : $country == "us" ? "<li>United States</li>" | raw : '<li><a href="/cdlm/track/us">United States</a></li>' | raw
+        : $country == "uk" ? "<li>United Kingdom</li>" | raw : '<li><a href="/cdlm/track/uk">United Kingdom</a></li>' | raw
         </ul>
     </div>
     <div id="current"></div>
