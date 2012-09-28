@@ -8,8 +8,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/blitzer/jquery-ui.css" />
-<script src="/cdlm/js/base.js"></script>
-<link rel="stylesheet" href="/cdlm/css/base.css" />
+<script src="/js/base.js"></script>
+<link rel="stylesheet" href="/css/base.css" />
 : include include::google_analytics
 </head>
 <body>
@@ -28,33 +28,9 @@ jQuery(function($) {
     $("#content").tabs();
     get_list("<: $country :>", "<: $rank :>");
 });
-function onYouTubePlayerReady(playerId) {
-    document.getElementById(playerId).addEventListener("onStateChange", "onytplayerStateChange");
-}
-
-function onytplayerStateChange(newState) {
-    // 削除動画を読み込むと止まってしまう対策
-    switch (newState) {
-        case 0:     // 終了
-            next();
-            break;
-        case 1:     // 再生中
-            loading = false;
-            break;
-        case 2:     // 一時停止中
-            if ( loading ) {
-                next();
-            }
-            loading = false;
-            break;
-        case 3:     // バッファリング中
-            loading = true;
-            break;
-    }
-}
 </script>
 <header>
-<h1><a href="/cdlm/">CountDown LastFM Ranking (<: $country :>)</a></h1>
+<h1><a href="/">CountDown LastFM Ranking (<: $country :>)</a></h1>
 </header>
 <article>
 <div id="content">
@@ -71,9 +47,9 @@ function onytplayerStateChange(newState) {
     <div id="other">
         <p>Do You Want to Play Which Countries Ranking ??</p>
         <ul class=".ui-icon-play">
-        : $country == "jp" ? '<li>Japan</li>' | raw : '<li><a href="/cdlm/track/jp">Japan</a></li>' | raw
-        : $country == "us" ? "<li>United States</li>" | raw : '<li><a href="/cdlm/track/us">United States</a></li>' | raw
-        : $country == "uk" ? "<li>United Kingdom</li>" | raw : '<li><a href="/cdlm/track/uk">United Kingdom</a></li>' | raw
+        : $country == "jp" ? '<li>Japan</li>' | raw : '<li><a href="/track/jp">Japan</a></li>' | raw
+        : $country == "us" ? "<li>United States</li>" | raw : '<li><a href="/track/us">United States</a></li>' | raw
+        : $country == "uk" ? "<li>United Kingdom</li>" | raw : '<li><a href="/track/uk">United Kingdom</a></li>' | raw
         </ul>
     </div>
     <div id="current"></div>

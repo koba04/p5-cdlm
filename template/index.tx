@@ -8,8 +8,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/blitzer/jquery-ui.css" />
-<script src="/cdlm/js/base.js"></script>
-<link rel="stylesheet" href="/cdlm/css/base.css" />
+<script src="/js/base.js"></script>
+<link rel="stylesheet" href="/css/base.css" />
 : include include::google_analytics
 </head>
 <body>
@@ -29,9 +29,9 @@ jQuery(function($) {
     <div id="about">
         CoundDown LastFM Ranking is...
         <ul>
-            <li><a href="/cdlm/track/jp">Japan</a></li>
-            <li><a href="/cdlm/track/us">United States</a></li>
-            <li><a href="/cdlm/track/uk">United Kingdom</a></li>
+            <li><a href="/track/jp">Japan</a></li>
+            <li><a href="/track/us">United States</a></li>
+            <li><a href="/track/uk">United Kingdom</a></li>
     </div>
     </div>
 </div>

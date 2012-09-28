@@ -1,48 +1,65 @@
 var video_list = [];
 var rank_max = 50;
 var index = rank_max;
-var init = true;
 var country;
+var player;
 function get_list(load_country, init_index) {
     country = load_country;
     if (init_index) {
         index = init_index;
     }
-    $.getJSON("/cdlm/track/" + country + ".json", {},
-        function(rs) {
-            var html = "";
-            var is_index_set = false;
-            $.each(rs.reverse(), function(i, v){
-                video_list[this.rank] = this;
-                html += '<div id="trac_"' + this.rank  + '" class="track">';
-                html += '<span class="rank">' + this.rank + "&nbsp;</span>";
-                html += '<span class="info">' + this.info.artist.name + " / " + this.info.name + "</span><br />";
-                if ( this.video ) {
-                    html += '<span class="video_info">(' + this.video.title + ")</span>";
-                    html += '<input type="button" id="button_trac_' + this.rank + '" value="play" class="play_button" />';
-                    // 最初に再生可能なインデックス
-                    if ( !is_index_set && !init_index) {
-                        index = this.rank;
-                        is_index_set = true;
+    $.getJSON("/track/" + country + ".json", {}, function(rs) {
+          var html = "";
+          var is_index_set = false;
+          $.each(rs.reverse(), function(i, v){
+              video_list[this.rank] = this;
+              html += '<div id="trac_"' + this.rank  + '" class="track">';
+              html += '<span class="rank">' + this.rank + "&nbsp;</span>";
+              html += '<span class="info">' + this.info.artist.name + " / " + this.info.name + "</span><br />";
+              if ( this.video ) {
+                  html += '<span class="video_info">(' + this.video.title + ")</span>";
+                  html += '<input type="button" id="button_trac_' + this.rank + '" value="play" class="play_button" />';
+                  // 最初に再生可能なインデックス
+                  if ( !is_index_set && !init_index) {
+                      index = this.rank;
+                      is_index_set = true;
+                  }
+              }
+              html += '</div>';
+          });
+          $("#list").html(html);
+          highlight();
+
+          $(".play_button").click(function() {
+              var id = $(this).attr('id');
+              id = id.replace(/button_trac_/,"")
+              play('next', id);
+          });
+
+        // https://developers.google.com/youtube/iframe_api_reference
+        var tag = document.createElement('script');
+        tag.src = "//www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        window.onYouTubeIframeAPIReady = function() {
+            player = new YT.Player('video', {
+                height: 480 * 0.7,
+                width: 854 * 0.7,
+                videoId: video_list[index].video.id,
+                events: {
+                    'onStateChange': function(e) {
+                        var state = e.data;
+                        if (state == YT.PlayerState.ENDED) {
+                            next();
+                        }
+                    },
+                    'onError': function(e) {
+                        next();
                     }
                 }
-                html += '</div>';
             });
-            $("#list").html(html);
-            highlight();
-
-            $(".play_button").click(function() {
-                var id = $(this).attr('id');
-                id = id.replace(/button_trac_/,"")
-                play('next', id);
-            });
-
-            swfobject.embedSWF("http://www.youtube.com/v/" + video_list[index].video.id + "?enablejsapi=1&playerapiid=player",
-                              "video", 854 * 0.7, 480 * 0.7, "8", null, null, { allowScriptAccess: "always" }, { id: "player" });
-            play('next');
-            init = false;
-       }
-    );
+        }
+    });
 }
 
 function next() {
@@ -82,9 +99,8 @@ function play(mode, play_index) {
         }
     }
 
-    if (!init) {
-        document.getElementById("player").loadVideoById(video_list[index].video.id);
-    }
+   player.loadVideoById(video_list[index].video.id);
+
     var current_html = '<div class="track">';
     current_html += '<span class="rank">' + video_list[index].rank + "&nbsp;</span>";
     current_html += '<span class="info">' + video_list[index].info.artist.name + " / " + video_list[index].info.name + "</span><br />";
@@ -110,9 +126,9 @@ function play(mode, play_index) {
         $("#next_song").html("");
     }
     highlight();
-    history.replaceState(null, "CDLM " + country + ":" + index, "/cdlm/track/" + country + "/" + index);
+    history.replaceState(null, "CDLM " + country + ":" + index, "/track/" + country + "/" + index);
 }
 function highlight() {
-   $("#list").children().css("color", "black");
+    $("#list").children().css("color", "black");
     $("#trac_" + video_list[index].rank).css("color", "red");
 }
