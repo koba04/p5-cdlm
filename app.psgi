@@ -38,7 +38,7 @@ builder {
             my $rank = CDLM::Cache->new->get_callback(
                 $country . '_' . $from,
                 sub {
-                    CDLM->rank($country, $from);
+                    CDLM->track($country, $from);
                 },
                 # 8days
                 60 * 60 * 24 * 8,
