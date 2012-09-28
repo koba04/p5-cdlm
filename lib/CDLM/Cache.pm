@@ -22,12 +22,12 @@ sub get {
 
 sub get_callback {
     my $self = shift;
-    my ( $key, $code ) = @_;
+    my ( $key, $code, $expire ) = @_;
 
     my $data = $self->get( $key );
     unless ( defined $data ) {
         $data = $code->();
-        $self->set($key, $data);
+        $self->set($key, $data, $expire);
     }
     return $data;
 
