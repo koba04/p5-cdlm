@@ -44,8 +44,8 @@ function get_list(load_country, init_index) {
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         window.onYouTubeIframeAPIReady = function() {
             player = new YT.Player('video', {
-                height: 480 * 0.7,
-                width: 854 * 0.7,
+                height: 450,
+                width: 800,
                 videoId: video_list[index].video.id,
                 events: {
                     'onStateChange': function(e) {
