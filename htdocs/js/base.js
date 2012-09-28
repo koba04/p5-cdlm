@@ -3,6 +3,7 @@ var rank_max = 50;
 var index = rank_max;
 var country;
 var player;
+var init = true;
 function get_list(load_country, init_index) {
     country = load_country;
     if (init_index) {
@@ -59,6 +60,8 @@ function get_list(load_country, init_index) {
                 }
             });
         }
+        play('next');
+        init = false;
     });
 }
 
@@ -99,7 +102,9 @@ function play(mode, play_index) {
         }
     }
 
-   player.loadVideoById(video_list[index].video.id);
+    if ( !init ) {
+        player.loadVideoById(video_list[index].video.id);
+    }
 
     var current_html = '<div class="track">';
     current_html += '<span class="rank">' + video_list[index].rank + "&nbsp;</span>";
