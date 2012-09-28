@@ -36,8 +36,19 @@ jQuery(function($) {
     </div>
 </div>
 </article>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=346463362115366";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <footer>
-created by <a href="http://about.me/koba04">koba04</a>. powered by <a href="http://www.youtube.com/">Youtube</a> &amp; <a href="http://www.lastfm.com">Last.fm</a>
+created by <a href="http://about.me/koba04">koba04</a>. powered by <a href="http://www.youtube.com/">Youtube</a> &amp; <a href="http://www.lastfm.com">Last.fm</a>&nbsp;
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<span class="fb-like" data-href="http://cdlm.koba04.com/" data-send="false" data-layout="button_count" data-width="50" data-show-faces="false"></span>&nbsp;
+<a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-hashtags="cdlm">ツイート</a>
 </footer>
 </body>
 </html>
