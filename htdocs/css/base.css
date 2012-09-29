@@ -10,7 +10,6 @@ h1 {
 
 header {
     display: block;
-    border-radius: 5px;
     color: white;
     background-color: #CC0000;
 }
@@ -91,11 +90,11 @@ a:hover {
     margin-left: 25px;
 }
 
-
 footer {
     display: block;
     font-size: 0.9em;
-    border-radius: 5px;
+    height: 30px;
+    padding: 2px;
     color: white;
     background-color: #CC0000;
 }
