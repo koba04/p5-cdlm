@@ -27,7 +27,7 @@ jQuery(function($) {
     <li><a href="#about">About</a></li>
     </ul>
     <div id="about">
-        CoundDown LastFM Ranking is...
+        Do You Want to Play Which Countries Ranking ??
         <ul>
             <li><a href="/track/jp">Japan</a></li>
             <li><a href="/track/us">United States</a></li>
