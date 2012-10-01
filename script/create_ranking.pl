@@ -13,10 +13,7 @@ use Data::Dumper;
 my $cache = CDLM::Cache->new;
 for my $country (qw/jp us uk/) {
     for my $from (qw/JP US UK/) {
-        warn $country;
         my $rank = CDLM->track($country, $from);
         $cache->set($country. '_' . $from, $rank, 60 * 60 * 24 * 8);
-        # for degug
-        warn Dumper $rank;
     }
 }
