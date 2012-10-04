@@ -111,6 +111,7 @@ function play(mode, play_index) {
     current_html += '<span class="info">' + video_list[index].info.artist.name + " / " + video_list[index].info.name + "</span><br />";
     if ( video_list[index].video ) {
         current_html += '<span class="video_info">(' +  video_list[index].video.title + ")</span>";
+        $('title').text(video_list[index].video.title);
     }
     current_html += '</div>';
     $("#current").html(current_html);
