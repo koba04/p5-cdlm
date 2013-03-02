@@ -14,8 +14,8 @@
   <script src="/js/html5shiv.js"></script>
   <script src="/js/IE9.js"></script>
   <![endif]-->
-  <script src="/js/cdlm.js"></script>
-  <link rel="stylesheet" href="/css/main.css" />
+  <script src="/js/cdlm.min.js?v=<: $static_version :>"></script>
+  <link rel="stylesheet" href="/css/main.css?v=<: $static_version :>" />
   : include inc::google_analytics
 </head>
 <body>

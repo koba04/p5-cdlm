@@ -14,6 +14,8 @@ use lib File::Spec->catdir(dirname(__FILE__), 'lib');
 use CDLM;
 use CDLM::Cache;
 
+my $static_version = '0.1';
+
 builder {
     enable "Plack::Middleware::Static",
         path => qr{^/(img|js|css)/}, root => File::Spec->catdir(dirname(__FILE__), 'htdocs');
@@ -29,9 +31,9 @@ builder {
             path    => [ File::Spec->catdir(dirname(__FILE__), 'template') ],
         );
         if ( $req->path eq '/' ) {
-            $response = $tx->render('index.tx', {});
+            $response = $tx->render('index.tx', { static_version => $static_version });
         } elsif ( $country && $req->path =~ m{/track/(?:jp|us|uk)(?:/(\d{1,2}))?$} ) {
-            $response = $tx->render('track.tx', { country => $country, rank => $1 });
+            $response = $tx->render('track.tx', { static_version => $static_version, country => $country, rank => $1 });
         } elsif ( $country && $req->path =~ /\.json$/ ) {
             # XXX get client ip address?
             my $from = 'JP';
