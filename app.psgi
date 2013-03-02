@@ -14,7 +14,7 @@ use lib File::Spec->catdir(dirname(__FILE__), 'lib');
 use CDLM;
 use CDLM::Cache;
 
-my $static_version = '0.1';
+my $static_version = '0.2';
 
 builder {
     enable "Plack::Middleware::Static",

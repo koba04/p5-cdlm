@@ -4,10 +4,14 @@
     <li><a href="#about">About</a></li>
   </ul>
   <div id="about">
-    Do You Want to Play Which Countries Ranking ??
+    Last.FMの国ごとのランキングを50位からカウントダウンで連続再生出来るサービスです
+  </div>
+  <div class="select-country">
+    <h2>ランキングを再生したい国を選んでください</h2>
     <ul>
       <li><a href="/track/jp">Japan</a></li>
       <li><a href="/track/us">United States</a></li>
       <li><a href="/track/uk">United Kingdom</a></li>
+    </ul>
   </div>
 : }

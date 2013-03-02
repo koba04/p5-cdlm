@@ -11,17 +11,19 @@
   </div>
   <div id="list"></div>
   <div id="other">
-    <p>Do You Want to Play Which Countries Ranking ??</p>
-    <ul class=".ui-icon-play">
-      : $country == "jp" ? '<li>Japan</li>' | raw : '<li><a href="/track/jp">Japan</a></li>' | raw
-      : $country == "us" ? "<li>United States</li>" | raw : '<li><a href="/track/us">United States</a></li>' | raw
-      : $country == "uk" ? "<li>United Kingdom</li>" | raw : '<li><a href="/track/uk">United Kingdom</a></li>' | raw
+    <div class="select-country">
+      <h2>ランキングを再生したい国を選んでください</h2>
+      <ul class=".ui-icon-play">
+        : $country == "jp" ? '<li>Japan</li>' | raw : '<li><a href="/track/jp">Japan</a></li>' | raw
+        : $country == "us" ? "<li>United States</li>" | raw : '<li><a href="/track/us">United States</a></li>' | raw
+        : $country == "uk" ? "<li>United Kingdom</li>" | raw : '<li><a href="/track/uk">United Kingdom</a></li>' | raw
       </ul>
+    </div>
   </div>
   <div id="current"></div>
   <div id="video"></div>
   <div id="operation" >
-    <input type="button"  id="prev" value="Prev" />
-    <input type="button"  id="next" value="Next" />
+    <input type="button"  id="prev" value="&lt;&lt;&nbsp;Prev" />
+    <input type="button"  id="next" value="Next&nbsp;&gt;&gt;" />
   </div>
 : }

@@ -8,14 +8,19 @@ h1 {
     font-size: 1.2em;
 }
 
+h2 {
+    font-size: 1.2em;
+}
+
 header {
     display: block;
     color: white;
     background-color: #CC0000;
-}
-header a, header a:visited, header a:hover {
-    color: white;
-    text-decoration: none;
+
+    a, a:visited, a:hover {
+        color: white;
+        text-decoration: none;
+    }
 }
 
 div {
@@ -27,8 +32,11 @@ li {
     margin-bottom: 5px;
 }
 
-a:hover {
-    color:red;
+a {
+    text-decoration: none;
+    &:hover {
+        color:red;
+    }
 }
 
 .rank {
@@ -39,6 +47,7 @@ a:hover {
 .info {
     font-size: 1.2em;
 }
+
 .video_info {
     font-size: 0.8em;
 }
@@ -48,21 +57,47 @@ a:hover {
     border-bottom: dotted medium #FFE4E1;
     margin-bottom: 8px;
 }
-.next_track {
 
-}
 .play_button {
     float: right;
-    padding: 5px 20px;
     margin-bottom: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    background-color: #EEEEEE;
-    border-radius: 5px;
-    color: #004276;
 }
-.play_button:hover {
-    background-color: #FFE4E1;
+
+.select-country {
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 1.2em;
+
+    a {
+        color: #004276;
+        &:hover {
+            color: red;
+        }
+    }
+
+    li {
+        margin: 10px 0;
+
+    }
+}
+
+input {
+    &[type="button"] {
+        padding: 5px 20px;
+        font-weight: bold;
+        cursor: pointer;
+        background-color: #EEEEEE;
+        border-radius: 5px;
+        color: #004276;
+
+        &:hover {
+            background-color: #FFE4E1;
+        }
+    }
+}
+
+#video {
+    margin-left: 25px;
 }
 
 #content {
@@ -86,7 +121,9 @@ a:hover {
     background-color: #FFE4E1;
     border-radius: 5px;
 }
+
 #player, #operation {
+    text-align: center;
     margin-left: 25px;
 }
 
@@ -97,10 +134,13 @@ footer {
     padding: 2px;
     color: white;
     background-color: #CC0000;
+
+    a, a:visited {
+        color: white;
+    }
+
+    a:hover {
+        color: gray;
+    }
 }
-footer a, footer a:visited{
-    color: white;
-}
-footer a:hover {
-    color:gray;
-}
+
