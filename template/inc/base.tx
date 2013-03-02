@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="YouTube, LastFM, Player,連続再生, ランキング">
+  <meta name="description" content="Last.FMのランキングをもとにYouTubeの動画を連続再生する">
+  <meta name="country" content="<: $country :>">
+  <meta name="rank" content="<: $rank :>">
+  <title>CountDown LastFM Ranking<: if $country { "(" ~ $country ~ ")" } :></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/blitzer/jquery-ui.css" />
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.js"></script>
+  <script src="/js/IE9.js"></script>
+  <![endif]-->
+  <script src="/js/cdlm.js"></script>
+  <link rel="stylesheet" href="/css/main.css" />
+  : include inc::google_analytics
+</head>
+<body>
+  <header>
+  <h1><a href="/">CountDown LastFM Ranking<: if $country { "(" ~ $country ~ ")" } :></a></h1>
+  </header>
+  <article>
+  <div id="content">
+  : block main -> {}
+  </div>
+  </article>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=346463362115366";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+  <footer>
+    created by <a href="http://about.me/koba04">koba04</a>. powered by <a href="http://www.youtube.com/">Youtube</a> &amp; <a href="http://www.lastfm.com">Last.fm</a>&nbsp;
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <span class="fb-like" data-href="http://cdlm.koba04.com/" data-send="false" data-layout="button_count" data-width="50" data-show-faces="false"></span>&nbsp;
+    <a href="https://twitter.com/intent/tweet?screen_name=koba04&text=http%3A%2F%2Fpetatube.koba04.com%2F%20" class="twitter-mention-button" data-lang="ja" data-related="koba04">Tweet to @koba04</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-hashtags="cdlm">ツイート</a>
+  </footer>
+</body>
+</html>

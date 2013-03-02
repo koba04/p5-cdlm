@@ -1,5 +1,4 @@
 Makefile
-inc/
 MANIFEST
 *.bak
 *.old
