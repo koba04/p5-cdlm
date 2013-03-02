@@ -1,84 +1,27 @@
-<!DOCTYPE html>
-<head>
-<meta charset="utf-8">
-<meta name="keywords" content="YouTube, LastFM, Player,連続再生, ランキング">
-<meta name="description" content="Last.FMのランキングをもとにYouTubeの動画を連続再生する">
-<title>CountDown LastFM Ranking (<: $country :>)</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/blitzer/jquery-ui.css" />
-<!--[if lt IE 9]>
-<script src="/js/html5shiv.js"></script>
-<script src="/js/IE9.js"></script>
-<![endif]-->
-<script src="/js/base.js"></script>
-<link rel="stylesheet" href="/css/base.css" />
-: include include::google_analytics
-</head>
-<body>
-<script>
-var loading = false;
-jQuery(function($) {
-    $("#prev").click(function(){
-        prev();
-    });
-    $("#next").click(function(){
-        next();
-    });
-    $("#show").click(function() {
-        show();
-    });
-    $("#content").tabs();
-    get_list("<: $country :>", "<: $rank :>");
-});
-</script>
-<header>
-<h1><a href="/">CountDown LastFM Ranking (<: $country :>)</a></h1>
-</header>
-<article>
-<div id="content">
-    <ul>
+: cascade inc::base
+: around main -> {
+  <ul>
     <li><a href="#play">Video</a></li>
     <li><a href="#list">Chart</a></li>
     <li><a href="#other">Other</a></li>
-    </ul>
-    <div id="play">
-        <span id="info"></span>
-        <div id="next_song"></div>
-    </div>
-    <div id="list"></div>
-    <div id="other">
-        <p>Do You Want to Play Which Countries Ranking ??</p>
-        <ul class=".ui-icon-play">
-        : $country == "jp" ? '<li>Japan</li>' | raw : '<li><a href="/track/jp">Japan</a></li>' | raw
-        : $country == "us" ? "<li>United States</li>" | raw : '<li><a href="/track/us">United States</a></li>' | raw
-        : $country == "uk" ? "<li>United Kingdom</li>" | raw : '<li><a href="/track/uk">United Kingdom</a></li>' | raw
-        </ul>
-    </div>
-    <div id="current"></div>
-    <div id="video"></div>
-    <div id="operation" >
-        <input type="button"  id="prev" value="Prev" />
-        <input type="button"  id="next" value="Next" />
-    </div>
-</div>
-</article>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=346463362115366";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<footer>
-  created by <a href="http://about.me/koba04">koba04</a>. powered by <a href="http://www.youtube.com/">Youtube</a> &amp; <a href="http://www.lastfm.com">Last.fm</a>&nbsp;
-  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-  <span class="fb-like" data-href="http://cdlm.koba04.com/" data-send="false" data-layout="button_count" data-width="50" data-show-faces="false"></span>&nbsp;
-  <a href="https://twitter.com/intent/tweet?screen_name=koba04&text=http%3A%2F%2Fpetatube.koba04.com%2F%20" class="twitter-mention-button" data-lang="ja" data-related="koba04">Tweet to @koba04</a>
-  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-  <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-hashtags="cdlm">ツイート</a>
-</footer>
-</body>
-</html>
+  </ul>
+  <div id="play">
+    <span id="info"></span>
+    <div id="next_song"></div>
+  </div>
+  <div id="list"></div>
+  <div id="other">
+    <p>Do You Want to Play Which Countries Ranking ??</p>
+    <ul class=".ui-icon-play">
+      : $country == "jp" ? '<li>Japan</li>' | raw : '<li><a href="/track/jp">Japan</a></li>' | raw
+      : $country == "us" ? "<li>United States</li>" | raw : '<li><a href="/track/us">United States</a></li>' | raw
+      : $country == "uk" ? "<li>United Kingdom</li>" | raw : '<li><a href="/track/uk">United Kingdom</a></li>' | raw
+      </ul>
+  </div>
+  <div id="current"></div>
+  <div id="video"></div>
+  <div id="operation" >
+    <input type="button"  id="prev" value="Prev" />
+    <input type="button"  id="next" value="Next" />
+  </div>
+: }
