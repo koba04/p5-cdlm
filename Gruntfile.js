@@ -36,15 +36,15 @@ module.exports = function (grunt) {
       },
       dist: {
         src: [
-          "src/js/main.js",
+          "src/js/main.js"
         ],
-        dest: "static/js/<%= pkg.name %>.js"
+        dest: "htdocs/js/<%= pkg.name %>.js"
       }
     },
     uglify: {
       dist: {
         src: "<%= concat.dist.dest %>",
-        dest: "static/js/<%= pkg.name %>.min.js"
+        dest: "htdocs/js/<%= pkg.name %>.min.js"
       }
     },
     jshint: {
