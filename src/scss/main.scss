@@ -1,3 +1,4 @@
+@import "compass/css3";
 body{
     margin: 0 0 0 0;
     background-color: #E3E3E3;
@@ -98,6 +99,7 @@ input {
 
 #video {
     margin-left: 25px;
+    @include box-shadow(#512723 5px 5px 20px);
 }
 
 #content {
@@ -110,6 +112,9 @@ input {
     margin-right: 5px;
     margin-bottom: 20px;
     float: left;
+    img {
+        @include box-shadow(#512723 5px 5px 20px);
+    }
 }
 #next_song {
     font-size: 0.8em;
