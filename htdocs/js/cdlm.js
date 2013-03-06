@@ -2,151 +2,165 @@
 
   jQuery(function($) {
     "use strict";
-    var country, getList, highlight, index, init, next, play, player, prev, rankMax, videoList;
-    videoList = [];
-    rankMax = 50;
-    index = rankMax;
-    country = '';
-    player = '';
-    init = true;
-    highlight = function() {
-      $("#list").children().css("color", "black");
-      return $("#trac_" + videoList[index].rank).css("color", "red");
-    };
-    play = function(mode, playIndex) {
-      var currentHtml, next, nextSongHtml;
-      if (playIndex) {
-        index = playIndex;
+    var CDLM, cdlm;
+    CDLM = (function() {
+
+      CDLM.prototype.rankMax = 50;
+
+      function CDLM(country, rank) {
+        this.videoList = [];
+        this.index = rank || this.rankMax;
+        this.country = country;
+        this.player = '';
+        this.init = true;
       }
-      while (!videoList[index] || !videoList[index].video) {
-        if (mode === 'prev') {
-          if (index >= rankMax) {
-            return;
-          }
-          ++index;
-        } else {
-          if (index <= 1) {
-            return;
-          }
-          --index;
+
+      CDLM.prototype.play = function(mode, playIndex) {
+        var currentHtml, next, nextSongHtml;
+        if (playIndex) {
+          this.index = playIndex;
         }
-      }
-      if (!init) {
-        player.loadVideoById(videoList[index].video.id);
-      }
-      currentHtml = '<div class="track">';
-      currentHtml += '<span class="rank">' + videoList[index].rank + "&nbsp</span>";
-      currentHtml += '<span class="info">' + videoList[index].info.artist.name + " / " + videoList[index].info.name + "</span><br />";
-      if (videoList[index].video) {
-        currentHtml += '<span class="video_info">(' + videoList[index].video.title + ")</span>";
-        $('title').text(videoList[index].video.title);
-      }
-      currentHtml += '</div>';
-      $("#current").html(currentHtml);
-      if (videoList[index].rank > 1) {
-        next = index - 1;
-        nextSongHtml = '';
-        if (videoList[next].video) {
-          nextSongHtml = '<div id="next_img"><img src="' + videoList[next].video.thumbnail.sqDefault + '" width="120" height="90" /></div>';
-        }
-        nextSongHtml += '<div class="next_track">';
-        nextSongHtml += '<span class="rank">' + videoList[next].rank + '&nbsp</span>';
-        nextSongHtml += '<span class="info">' + videoList[next].info.artist.name + " / " + videoList[next].info.name + "</span><br />";
-        if (videoList[next].video) {
-          nextSongHtml += '<span class="video_info">(' + videoList[next].video.title + ")</span>";
-        }
-        nextSongHtml += '</div>';
-        $("#next_song").html(nextSongHtml);
-      } else {
-        $("#next_song").html("");
-      }
-      highlight();
-      return history.replaceState(null, "CDLM " + country + ":" + index, "/track/" + country + "/" + index);
-    };
-    next = function() {
-      if (index <= 1) {
-        return;
-      }
-      --index;
-      return play('next');
-    };
-    prev = function() {
-      if (index >= rankMax) {
-        return;
-      }
-      ++index;
-      return play('prev');
-    };
-    getList = function(loadCountry, initIndex) {
-      country = loadCountry;
-      if (initIndex) {
-        index = initIndex;
-      }
-      return $.getJSON("/track/" + country + ".json", {}, function(rs) {
-        var firstScriptTag, html, isIndexSet, tag;
-        html = "";
-        isIndexSet = false;
-        $.each(rs.reverse(), function() {
-          videoList[this.rank] = this;
-          html += '<div id="trac_"' + this.rank + '" class="track">';
-          html += '<span class="rank">' + this.rank + "&nbsp</span>";
-          html += '<span class="info">' + this.info.artist.name + " / " + this.info.name + "</span><br />";
-          if (this.video) {
-            html += '<span class="video_info">(' + this.video.title + ")</span>";
-            html += '<input type="button" id="button_trac_' + this.rank + '" value="play" class="play_button" />';
-            if (!isIndexSet && !initIndex) {
-              index = this.rank;
-              isIndexSet = true;
+        while (!this.videoList[this.index] || !this.videoList[this.index].video) {
+          if (mode === 'prev') {
+            if (this.index >= this.rankMax) {
+              return;
             }
+            ++this.index;
+          } else {
+            if (this.index <= 1) {
+              return;
+            }
+            --this.index;
           }
-          return html += '</div>';
-        });
-        $("#list").html(html);
-        highlight();
-        $(".play_button").click(function() {
-          var id;
-          id = $(this).attr('id');
-          id = id.replace(/button_trac_/, "");
-          return play('next', id);
-        });
-        tag = document.createElement('script');
-        tag.src = "//www.youtube.com/iframe_api";
-        firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        window.onYouTubeIframeAPIReady = function() {
-          return player = new YT.Player('video', {
-            height: '425',
-            width: '760',
-            videoId: videoList[index].video.id,
-            events: {
-              'onStateChange': function(e) {
-                var state;
-                state = e.data;
-                if (state === YT.PlayerState.ENDED) {
-                  return next();
-                }
-              },
-              'onError': function() {
-                return next();
+        }
+        if (!this.init) {
+          this.player.loadVideoById(this.videoList[this.index].video.id);
+        }
+        currentHtml = '<div class="track">';
+        currentHtml += '<span class="rank">' + this.videoList[this.index].rank + "&nbsp</span>";
+        currentHtml += '<span class="info">' + this.videoList[this.index].info.artist.name + " / " + this.videoList[this.index].info.name + "</span><br />";
+        if (this.videoList[this.index].video) {
+          currentHtml += '<span class="video_info">(' + this.videoList[this.index].video.title + ")</span>";
+          $('title').text(this.videoList[this.index].video.title);
+        }
+        currentHtml += '</div>';
+        $("#current").html(currentHtml);
+        if (this.videoList[this.index].rank > 1) {
+          next = this.index - 1;
+          nextSongHtml = '';
+          if (this.videoList[next].video) {
+            nextSongHtml = '<div id="next_img"><img src="' + this.videoList[next].video.thumbnail.sqDefault + '" width="120" height="90" /></div>';
+            nextSongHtml += '<div class="next_track">';
+            nextSongHtml += '<span class="rank">' + this.videoList[next].rank + '&nbsp</span>';
+            nextSongHtml += '<span class="info">' + this.videoList[next].info.artist.name + " / " + this.videoList[next].info.name + "</span><br />";
+          }
+          if (this.videoList[next].video) {
+            nextSongHtml += '<span class="video_info">(' + this.videoList[next].video.title + ")</span>";
+          }
+          nextSongHtml += '</div>';
+          $("#next_song").html(nextSongHtml);
+        } else {
+          $("#next_song").html("");
+        }
+        this.highlight();
+        return history.replaceState(null, "CDLM " + this.country + ":" + this.index, "/track/" + this.country + "/" + this.index);
+      };
+
+      CDLM.prototype.next = function() {
+        if (this.index <= 1) {
+          return;
+        }
+        --this.index;
+        return this.play('next');
+      };
+
+      CDLM.prototype.prev = function() {
+        if (this.index >= this.rankMax) {
+          return;
+        }
+        ++this.index;
+        return this.play('prev');
+      };
+
+      CDLM.prototype.highlight = function() {
+        $("#list").children().css("color", "black");
+        return $("#trac_" + this.videoList[this.index].rank).css("color", "red");
+      };
+
+      CDLM.prototype.getList = function() {
+        var _this = this;
+        return $.getJSON("/track/" + this.country + ".json", {}, function(rs) {
+          var firstScriptTag, html, isIndexSet, tag, track, _i, _len, _ref;
+          html = "";
+          isIndexSet = false;
+          _ref = rs.reverse();
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            track = _ref[_i];
+            _this.videoList[track.rank] = track;
+            html += '<div id="trac_"' + track.rank + '" class="track">';
+            html += '<span class="rank">' + track.rank + "&nbsp</span>";
+            html += '<span class="info">' + track.info.artist.name + " / " + track.info.name + "</span><br />";
+            if (track.video) {
+              html += '<span class="video_info">(' + track.video.title + ")</span>";
+              html += '<input type="button" id="button_trac_' + track.rank + '" value="play" class="play_button" />';
+              if (!isIndexSet && _this.index) {
+                _this.index = track.rank;
+                isIndexSet = true;
               }
             }
+            html += '</div>';
+          }
+          $("#list").html(html);
+          _this.highlight();
+          $(".play_button").click(function(e) {
+            var id;
+            id = $(e.target).attr('id');
+            id = id.replace(/button_trac_/, "");
+            return _this.play('next', id);
           });
-        };
-        play('next');
-        return init = false;
-      });
-    };
+          tag = document.createElement('script');
+          tag.src = "//www.youtube.com/iframe_api";
+          firstScriptTag = document.getElementsByTagName('script')[0];
+          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+          window.onYouTubeIframeAPIReady = function() {
+            return _this.player = new YT.Player('video', {
+              height: '425',
+              width: '760',
+              videoId: _this.videoList[_this.index].video.id,
+              events: {
+                'onStateChange': function(e) {
+                  var state;
+                  state = e.data;
+                  if (state === YT.PlayerState.ENDED) {
+                    return _this.next();
+                  }
+                },
+                'onError': function() {
+                  return this.next();
+                }
+              }
+            });
+          };
+          _this.play('next');
+          return _this.init = false;
+        });
+      };
+
+      return CDLM;
+
+    })();
+    cdlm = new CDLM($("meta[name=country]").attr("content"), $("meta[name=rank]").attr("content"));
+    cdlm.getList();
     $("#prev").click(function() {
-      return prev();
+      return cdlm.prev();
     });
     $("#next").click(function() {
-      return next();
+      return cdlm.next();
     });
     $("#show").click(function() {
       return window.show();
     });
-    $("#content").tabs();
-    return getList($("meta[name=country]").attr("content"), $("meta[name=rank]").attr("content"));
+    return $("#content").tabs();
   });
 
 }).call(this);
