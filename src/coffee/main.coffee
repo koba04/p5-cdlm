@@ -15,7 +15,7 @@ jQuery( ($) ->
       @index = playIndex if playIndex
 
       # 動画なかったらさらに次へ
-      while !@videoList[@index] or !@videoList[@index].video
+      while not @videoList[@index] or not @videoList[@index].video
         if mode is 'prev'
           # これ以上戻れない
           return if @index >= @rankMax
@@ -24,13 +24,15 @@ jQuery( ($) ->
           # これ以上先はない
           return if @index <= 1
           --@index
-      @player.loadVideoById @videoList[@index].video.id if !@init
+      @player.loadVideoById @videoList[@index].video.id if not @init
 
-      currentHtml = '<div class="track">'
-      currentHtml += '<span class="rank">' + @videoList[@index].rank + "&nbsp</span>"
-      currentHtml += '<span class="info">' + @videoList[@index].info.artist.name + " / " + @videoList[@index].info.name + "</span><br />"
+      currentHtml = """
+                    <div class="track">
+                    <span class="rank">#{ @videoList[@index].rank }&nbsp</span>
+                    <span class="info">#{ @videoList[@index].info.artist.name }&nbsp/&nbsp#{ @videoList[@index].info.name }</span><br />
+                    """
       if @videoList[@index].video
-        currentHtml += '<span class="video_info">(' +  @videoList[@index].video.title + ")</span>"
+        currentHtml += """<span class="video_info">(#{ @videoList[@index].video.title })</span>"""
         $('title').text(@videoList[@index].video.title)
       currentHtml += '</div>'
       $("#current").html(currentHtml)
@@ -38,13 +40,14 @@ jQuery( ($) ->
         next = @index - 1
         nextSongHtml = ''
         if @videoList[next].video
-          nextSongHtml = '<div id="next_img"><img src="' + @videoList[next].video.thumbnail.sqDefault + '" width="120" height="90" /></div>'
-          nextSongHtml += '<div class="next_track">'
-          nextSongHtml += '<span class="rank">'  + @videoList[next].rank + '&nbsp</span>'
-          nextSongHtml += '<span class="info">' + @videoList[next].info.artist.name + " / " + @videoList[next].info.name + "</span><br />"
-        if @videoList[next].video
-          nextSongHtml += '<span class="video_info">(' + @videoList[next].video.title + ")</span>"
-        nextSongHtml += '</div>'
+          nextSongHtml += """
+                          <div id="next_img"><img src="#{ @videoList[next].video.thumbnail.sqDefault }" width="120" height="90" /></div>
+                          <div class="next_track">
+                          <span class="rank">#{ @videoList[next].rank }&nbsp</span>
+                          <span class="info">#{ @videoList[next].info.artist.name }&nbsp/&nbsp#{ @videoList[next].info.name }</span><br />
+                          <span class="video_info">(#{ @videoList[next].video.title })</span>
+                          </div>
+                          """
         $("#next_song").html(nextSongHtml)
       else
         $("#next_song").html("")
@@ -71,14 +74,18 @@ jQuery( ($) ->
         isIndexSet = false
         for track in rs.reverse()
           @videoList[track.rank] = track
-          html += '<div id="trac_"' + track.rank  + '" class="track">'
-          html += '<span class="rank">' + track.rank + "&nbsp</span>"
-          html += '<span class="info">' + track.info.artist.name + " / " + track.info.name + "</span><br />"
+          html += """
+                  <div id="trac_#{ track.rank }" class="track">
+                  <span class="rank">#{ track.rank }&nbsp</span>
+                  <span class="info">#{ track.info.artist.name }&nbsp;/&nbsp;#{ track.info.name }</span><br />
+                  """
           if track.video
-            html += '<span class="video_info">(' + track.video.title + ")</span>"
-            html += '<input type="button" id="button_trac_' + track.rank + '" value="play" class="play_button" />'
+            html += """
+                    <span class="video_info">(#{ track.video.title })</span>
+                    <input type="button" id="button_trac_#{ track.rank }" value="play" class="play_button" />
+                    """
             # 最初に再生可能なインデックス
-            if !isIndexSet and @index
+            if not isIndexSet and @index
               @index = track.rank
               isIndexSet = true
           html += '</div>'

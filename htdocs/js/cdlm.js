@@ -36,11 +36,9 @@
         if (!this.init) {
           this.player.loadVideoById(this.videoList[this.index].video.id);
         }
-        currentHtml = '<div class="track">';
-        currentHtml += '<span class="rank">' + this.videoList[this.index].rank + "&nbsp</span>";
-        currentHtml += '<span class="info">' + this.videoList[this.index].info.artist.name + " / " + this.videoList[this.index].info.name + "</span><br />";
+        currentHtml = "<div class=\"track\">\n<span class=\"rank\">" + this.videoList[this.index].rank + "&nbsp</span>\n<span class=\"info\">" + this.videoList[this.index].info.artist.name + "&nbsp/&nbsp" + this.videoList[this.index].info.name + "</span><br />";
         if (this.videoList[this.index].video) {
-          currentHtml += '<span class="video_info">(' + this.videoList[this.index].video.title + ")</span>";
+          currentHtml += "<span class=\"video_info\">(" + this.videoList[this.index].video.title + ")</span>";
           $('title').text(this.videoList[this.index].video.title);
         }
         currentHtml += '</div>';
@@ -49,15 +47,8 @@
           next = this.index - 1;
           nextSongHtml = '';
           if (this.videoList[next].video) {
-            nextSongHtml = '<div id="next_img"><img src="' + this.videoList[next].video.thumbnail.sqDefault + '" width="120" height="90" /></div>';
-            nextSongHtml += '<div class="next_track">';
-            nextSongHtml += '<span class="rank">' + this.videoList[next].rank + '&nbsp</span>';
-            nextSongHtml += '<span class="info">' + this.videoList[next].info.artist.name + " / " + this.videoList[next].info.name + "</span><br />";
+            nextSongHtml += "<div id=\"next_img\"><img src=\"" + this.videoList[next].video.thumbnail.sqDefault + "\" width=\"120\" height=\"90\" /></div>\n<div class=\"next_track\">\n<span class=\"rank\">" + this.videoList[next].rank + "&nbsp</span>\n<span class=\"info\">" + this.videoList[next].info.artist.name + "&nbsp/&nbsp" + this.videoList[next].info.name + "</span><br />\n<span class=\"video_info\">(" + this.videoList[next].video.title + ")</span>\n</div>";
           }
-          if (this.videoList[next].video) {
-            nextSongHtml += '<span class="video_info">(' + this.videoList[next].video.title + ")</span>";
-          }
-          nextSongHtml += '</div>';
           $("#next_song").html(nextSongHtml);
         } else {
           $("#next_song").html("");
@@ -97,12 +88,9 @@
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             track = _ref[_i];
             _this.videoList[track.rank] = track;
-            html += '<div id="trac_"' + track.rank + '" class="track">';
-            html += '<span class="rank">' + track.rank + "&nbsp</span>";
-            html += '<span class="info">' + track.info.artist.name + " / " + track.info.name + "</span><br />";
+            html += "<div id=\"trac_" + track.rank + "\" class=\"track\">\n<span class=\"rank\">" + track.rank + "&nbsp</span>\n<span class=\"info\">" + track.info.artist.name + "&nbsp;/&nbsp;" + track.info.name + "</span><br />";
             if (track.video) {
-              html += '<span class="video_info">(' + track.video.title + ")</span>";
-              html += '<input type="button" id="button_trac_' + track.rank + '" value="play" class="play_button" />';
+              html += "<span class=\"video_info\">(" + track.video.title + ")</span>\n<input type=\"button\" id=\"button_trac_" + track.rank + "\" value=\"play\" class=\"play_button\" />";
               if (!isIndexSet && _this.index) {
                 _this.index = track.rank;
                 isIndexSet = true;
